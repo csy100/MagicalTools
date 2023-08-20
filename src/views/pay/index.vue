@@ -97,6 +97,7 @@
 import {markRaw, ref} from 'vue'
 import {ElMessageBox} from "element-plus";
 import {Pointer} from "@element-plus/icons-vue";
+import request from "@/utils/request";
 
 const switchValue = ref(true);
 const monthPayData = ref([
@@ -193,17 +194,17 @@ const yearPayData = ref([
  * 支付
  */
 const payBill = (price:number) => {
-    // request.get('/order/getQRCode').then(({ data }) => {
-    //
-    // });
-    ElMessageBox.confirm(
-        '暂不收费哦宝子，快去使用吧！😘😘😘',
-        '支付',
-        {
-            type: 'warning',
-            icon: markRaw(Pointer),
-        }
-    )
+    request.get(`/order/getQRCode?price=${price}`).then(({ data }) => {
+      console.log(data)
+    });
+    // ElMessageBox.confirm(
+    //     '暂不收费哦宝子，快去使用吧！😘😘😘',
+    //     '支付',
+    //     {
+    //         type: 'warning',
+    //         icon: markRaw(Pointer),
+    //     }
+    // )
 };
 
 </script>
